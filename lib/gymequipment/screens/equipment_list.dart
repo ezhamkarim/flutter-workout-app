@@ -1,7 +1,7 @@
-import 'package:workouttrackerapps/newequipment/components/card_equipment.dart';
-import 'package:workouttrackerapps/newequipment/models/equipments.dart';
-import 'package:workouttrackerapps/newequipment/screens/equipment_detail.dart';
-import 'package:workouttrackerapps/newequipment/services/db_query.dart';
+import 'package:workouttrackerapps/gymequipment/components/card_equipment.dart';
+import 'package:workouttrackerapps/gymequipment/models/equipments.dart';
+import 'package:workouttrackerapps/gymequipment/screens/equipment_detail.dart';
+import 'package:workouttrackerapps/gymequipment/services/db_query.dart';
 import 'package:flutter/material.dart';
 
 class EquipmentList extends StatefulWidget {
@@ -25,10 +25,37 @@ class _EquipmentListState extends State<EquipmentList> {
             color: Colors.white,
           );
         } else {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('EQUIPMENT TYPE'),
-            ),
+          return Scaffold
+    (
+      appBar: AppBar
+      (
+        elevation: 0.0,
+        backgroundColor: Colors.deepPurple,
+        leading: IconButton
+        (
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        title: Text('GYM EQUIPMENT', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+        // actions: <Widget>
+        // [
+        //   Container
+        //   (
+        //     margin: EdgeInsets.only(right: 8.0),
+        //     child: Row
+        //     (
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: <Widget>
+        //       [
+        //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
+        //         Icon(Icons.arrow_drop_down, color: Colors.black54)
+        //       ],
+        //     ),
+        //   )
+        // ],
+      ),
             body: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

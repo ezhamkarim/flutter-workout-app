@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:workouttrackerapps/dashboard.dart';
+import 'package:workouttrackerapps/dashboardd/pages/main_page.dart';
 import 'package:workouttrackerapps/register/views/login_screen.dart';
 
 class Register extends StatefulWidget {
@@ -22,8 +22,8 @@ class _RegisterViewState extends State<Register> {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     final logo = Image.asset(
-      "assets/images/glogo.png",
-      height: mq.size.height / 4,
+      "assets/images/default.png",
+      height: mq.size.height / 3,
     );
  
 
@@ -63,7 +63,7 @@ class _RegisterViewState extends State<Register> {
             color: Colors.white,
           ),
         ),
-        hintText: "something@example.com",
+        hintText: "something@gmail.com",
         labelText: "Email",
         labelStyle: TextStyle(
           color: Colors.white,
@@ -123,7 +123,7 @@ class _RegisterViewState extends State<Register> {
     );
 
     final fields = Padding(
-      padding: EdgeInsets.only(top: 10.0),
+      padding: EdgeInsets.only(top: 2.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -164,7 +164,7 @@ class _RegisterViewState extends State<Register> {
             updateUser.updateProfile(displayName: _usernameController.text);
             userSetup(_usernameController.text);
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => Dashboard()));
+                        builder: (context) => MainPage()));
           } on FirebaseAuthException catch (e) {
             if (e.code == 'weak-password') {
               print('The password provided is too weak.');
@@ -227,7 +227,7 @@ class _RegisterViewState extends State<Register> {
                 logo,
                 fields,
                 Padding(
-                  padding: EdgeInsets.only(bottom: 150),
+                  padding: EdgeInsets.only(bottom: 90),
                   child: bottom,
                 ),
               ],

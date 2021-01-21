@@ -1,5 +1,5 @@
-import 'package:workouttrackerapps/newequipment/models/equipments.dart';
-import 'package:workouttrackerapps/newequipment/services/db_query.dart';
+import 'package:workouttrackerapps/gymequipment/models/equipments.dart';
+import 'package:workouttrackerapps/gymequipment/services/db_query.dart';
 import 'package:flutter/material.dart';
 
 class EquipmentDetail extends StatefulWidget {
@@ -23,10 +23,37 @@ class _EquipmentDetailState extends State<EquipmentDetail> {
             color: Colors.white,
           );
         } else {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('EQUIPMENT DETAILS'),
-            ),
+          return Scaffold
+    (
+      appBar: AppBar
+      (
+        elevation: 0.0,
+        backgroundColor: Colors.deepPurple,
+        leading: IconButton
+        (
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        title: Text('EXERCISE DETAILS', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+        // actions: <Widget>
+        // [
+        //   Container
+        //   (
+        //     margin: EdgeInsets.only(right: 8.0),
+        //     child: Row
+        //     (
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: <Widget>
+        //       [
+        //         Text('beclothed.com', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14.0)),
+        //         Icon(Icons.arrow_drop_down, color: Colors.black54)
+        //       ],
+        //     ),
+        //   )
+        // ],
+      ),
             body: Container(
               child: Column(
                 children: <Widget>[

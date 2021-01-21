@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workouttrackerapps/dashboard.dart';
+import 'package:workouttrackerapps/dashboardd/pages/main_page.dart';
 import 'package:workouttrackerapps/register/views/register.dart';
 
 class Login extends StatefulWidget {
@@ -20,7 +20,7 @@ class _LoginViewState extends State<Login> {
 
 
     final logo = Image.asset(
-      "assets/images/glogo.png",
+      "assets/images/default.png",
       height: mq.size.height / 3,
     );
 
@@ -37,7 +37,7 @@ class _LoginViewState extends State<Login> {
             color: Colors.white,
           ),
         ),
-        hintText: "something@example.com",
+        hintText: "something@gmail.com",
         labelText: "Email",
         labelStyle: TextStyle(
           color: Colors.white,
@@ -112,7 +112,7 @@ class _LoginViewState extends State<Login> {
       color: Colors.white,
       child: MaterialButton(
         minWidth: mq.size.width / 1.2,
-        padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+        padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
         child: Text(
           "Login",
           textAlign: TextAlign.center,
@@ -134,7 +134,7 @@ class _LoginViewState extends State<Login> {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString('displayName', user.displayName);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => Dashboard()));
+                        builder: (context) => MainPage()));
             }
           } catch (e) {
             print(e);
@@ -186,7 +186,7 @@ class _LoginViewState extends State<Login> {
       backgroundColor: Color(0xFF651FFF),
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView(
+        child: SingleChildScrollView( 
           padding: EdgeInsets.all(36),
           child: Container(
             height: mq.size.height,

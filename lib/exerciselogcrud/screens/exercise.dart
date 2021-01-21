@@ -4,19 +4,21 @@ import 'package:workouttrackerapps/exerciselogcrud/models/exercise.dart';
 import 'package:workouttrackerapps/exerciselogcrud/providers/exercise_provider.dart';
 import 'package:provider/provider.dart';
 
-class EntryScreen extends StatefulWidget {
-  final Entry exercise;
+class ExerciseScreen extends StatefulWidget {
+  final Exercise exercise;
 
-  EntryScreen({this.exercise});
+  ExerciseScreen({this.exercise});
 
   @override
-  _EntryScreenState createState() => _EntryScreenState();
+  _ExerciseScreenState createState() => _ExerciseScreenState();
 }
 
-class _EntryScreenState extends State<EntryScreen> {
+class _ExerciseScreenState extends State<ExerciseScreen> {
 
   final exerciseController = TextEditingController();
   final levelController = TextEditingController();
+  final setsController = TextEditingController();
+  final repsController = TextEditingController();
 
   @override
   void dispose() {
@@ -26,12 +28,14 @@ class _EntryScreenState extends State<EntryScreen> {
 
   @override
   void initState() {
-    final exerciseProvider = Provider.of<EntryProvider>(context,listen: false);
+    final exerciseProvider = Provider.of<ExerciseProvider>(context,listen: false);
 
     if (widget.exercise != null){
       //Edit
       exerciseController.text = widget.exercise.exercise;
       levelController.text = widget.exercise.level;
+      setsController.text = widget.exercise.sets;
+      repsController.text = widget.exercise.reps;
 
       exerciseProvider.loadAll(widget.exercise);
     } else {
@@ -44,11 +48,11 @@ class _EntryScreenState extends State<EntryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final exerciseProvider = Provider.of<EntryProvider>(context);
+    final exerciseProvider = Provider.of<ExerciseProvider>(context);
  
     return Scaffold(  
-      appBar: AppBar(title: Text(formatDate(exerciseProvider.date, [MM, ' ', d, ', ', yyyy]))
-      ,actions: [
+      appBar: AppBar(backgroundColor: Colors.deepPurple,title: Text(formatDate(exerciseProvider.date, [MM, ' ', d, ', ', yyyy])),
+      actions: [
         IconButton(  
           icon: Icon(Icons.calendar_today),
           onPressed: (){
@@ -70,7 +74,7 @@ class _EntryScreenState extends State<EntryScreen> {
               ),
               maxLines: 3,
               minLines: 1,
-              onChanged: (String value) => exerciseProvider.changeEntry = value,
+              onChanged: (String value) => exerciseProvider.changeExercise = value,
               controller: exerciseController,
             ),
             TextField(  
@@ -82,11 +86,29 @@ class _EntryScreenState extends State<EntryScreen> {
               onChanged: (String value) => exerciseProvider.changeLevel = value,
               controller: levelController,
             ),
+            TextField(  
+              decoration: InputDecoration(  
+                labelText: 'Sets', border: InputBorder.none,
+              ),
+              maxLines: 3,
+              minLines: 1,
+              onChanged: (String value) => exerciseProvider.changeSets = value,
+              controller: setsController,
+            ),
+            TextField(  
+              decoration: InputDecoration(  
+                labelText: 'Reps', border: InputBorder.none,
+              ),
+              maxLines: 3,
+              minLines: 1,
+              onChanged: (String value) => exerciseProvider.changeReps = value,
+              controller: repsController,
+            ),
             RaisedButton(  
               color: Theme.of(context).accentColor,
               child: Text('Save',style: TextStyle(color: Colors.white)),
               onPressed: () {
-                exerciseProvider.saveEntry();
+                exerciseProvider.saveExercise();
                 Navigator.of(context).pop();
               },
             ),
@@ -94,7 +116,7 @@ class _EntryScreenState extends State<EntryScreen> {
               color: Colors.red,
               child: Text('Delete',style: TextStyle(color: Colors.white)),
               onPressed: () {
-                exerciseProvider.removeEntry(widget.exercise.exerciseId);
+                exerciseProvider.removeExercise(widget.exercise.exerciseId);
                 Navigator.of(context).pop();
               },
             ): Container(),
@@ -104,7 +126,7 @@ class _EntryScreenState extends State<EntryScreen> {
     );
   }
 
-   Future<DateTime> _pickDate(BuildContext context, EntryProvider exerciseProvider) async {
+   Future<DateTime> _pickDate(BuildContext context, ExerciseProvider exerciseProvider) async {
     final DateTime picked = await showDatePicker(
       context: context, initialDate: exerciseProvider.date, firstDate: DateTime(2019),
        lastDate: DateTime(2050));
